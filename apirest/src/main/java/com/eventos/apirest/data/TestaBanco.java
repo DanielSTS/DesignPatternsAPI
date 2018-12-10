@@ -1,0 +1,24 @@
+package com.eventos.apirest.data;
+
+import com.eventos.apirest.models.Evento;
+import java.sql.SQLException;
+
+public class TestaBanco {
+
+    public static void main(String[] args) throws SQLException {
+
+        Evento e = new Evento();
+
+        e.setCodigo(000);
+        e.setNome("tesewewewewewee");
+        e.setData("4325");
+        e.setHorario("hi");
+        e.setLocal("Trepa");
+
+        EventoDao ed = new EventoDao();
+
+        ed.adiciona(e);
+
+        }
+
+}
