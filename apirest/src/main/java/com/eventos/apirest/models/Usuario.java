@@ -2,7 +2,7 @@ package com.eventos.apirest.models;
 
 public class Usuario {
 	
-	private String login,nomeCompleto,senha;
+	private String nome,rg,login,senha;
 
 	public String getLogin() {
 		return login;
@@ -12,12 +12,12 @@ public class Usuario {
 		this.login = login;
 	}
 
-	public String getNomeCompleto() {
-		return nomeCompleto;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNomeCompleto(String nomeCompleto) {
-		this.nomeCompleto = nomeCompleto;
+	public void setNome(String nomeCompleto) {
+		this.nome = nomeCompleto;
 	}
 
 	public String getSenha() {
@@ -27,5 +27,15 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+
 
 }

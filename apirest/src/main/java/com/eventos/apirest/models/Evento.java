@@ -8,8 +8,16 @@ public class Evento {
 
 	private String nome,local,data,horario;
 
-	private ArrayList<Convidado> convidados;
-	
+	private ArrayList<Usuario> usuarios;
+
+	public ArrayList<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(ArrayList<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
 	public long getCodigo() {
 		return codigo;
 	}

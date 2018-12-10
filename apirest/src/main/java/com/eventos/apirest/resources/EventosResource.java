@@ -1,15 +1,12 @@
 package com.eventos.apirest.resources;
 
-import com.eventos.apirest.data.EventoDao;
-import com.eventos.apirest.data.UsuarioDao;
-import com.eventos.apirest.models.Convidado;
+import com.eventos.apirest.facade.Facade;
 import com.eventos.apirest.models.Evento;
 import com.eventos.apirest.models.Usuario;
 import org.springframework.web.bind.annotation.*;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+
 
 
 @RestController
@@ -18,62 +15,41 @@ import java.util.List;
 
 public class EventosResource {
 
+    Facade facade = new Facade();
+
     //retorna um usuario
 
-    @GetMapping("getusuario/{login}")
-    public Usuario getUsuario(@PathVariable(value = "login") String login)
+    @GetMapping("getusuario/{rg}")
+    public Usuario getUsuario(@PathVariable(value = "login") String rg)
     {
-        Usuario u = new Usuario();
-        u.setLogin(login);
-
-        UsuarioDao dao = new UsuarioDao();
-        u = dao.buscar(u);
-
-        return u;
+        return facade.getUsuario(rg);
     }
 
 
-    //retorna uma lista de usuarios
+    //retorna todos os usuarios
 
     @GetMapping("getlistusuario/list")
     public ArrayList<Usuario> listUsuarios() throws SQLException {
-        ArrayList<Usuario> lista;
 
-        UsuarioDao dao = new UsuarioDao();
-        lista = dao.listar();
-
-        return lista;
-
+        return facade.listarUsuarios();
     }
 
 
     //retorna todos os eventos
 
     @GetMapping("geteventosfull")
-    public List<Evento> getEventosFull() throws SQLException {
-        List<Evento> lista;
+    public ArrayList<Evento> listEventosFull() throws SQLException {
 
-        EventoDao dao = new EventoDao();
-        lista = dao.listarTudo();
-
-        return lista;
-
+        return facade.listarTodosEventos();
     }
 
 
     //retorna apenas os eventos que está participando
 
-    @GetMapping("geteventos/{login}")
-    public List<Evento> getEventos(@PathVariable("login") String login){
-        List<Evento> lista;
+    @GetMapping("geteventos/{rg}")
+    public ArrayList<Evento> listEventos(@PathVariable("rg") String rg){
 
-        Convidado c = new Convidado();
-        c.setRg(login);
-
-        EventoDao dao = new EventoDao();
-        lista = dao.listar(c);
-
-        return lista;
+        return facade.listarEventos(rg);
     }
 
 }
