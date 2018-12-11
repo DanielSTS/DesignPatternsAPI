@@ -28,9 +28,10 @@ public class EventoController {
       return new Facade().detalhes(codigo);
     }
 
-    @RequestMapping("/deletarEvento")
-    public void deletarEvento(@RequestBody Evento e) {
-        new Facade().removerEvento(e.getCodigo());
+    @RequestMapping(value="/deletarEvento/{codEvento}/{idUser}", method=RequestMethod.DELETE)
+    public void deletarEvento(@PathVariable("cod_evento") int codEvento,@PathVariable("id_user") int idUser) {
+        System.out.println(codEvento+" "+idUser);
+        new Facade().removerEvento(codEvento,idUser);
     }
 
     @RequestMapping("/deletarUsuario")

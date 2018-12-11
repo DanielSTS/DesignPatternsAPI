@@ -5,7 +5,7 @@ import com.eventos.apirest.data.UsuarioDao;
 import java.util.ArrayList;
 
 
-public class OrdenacaoTipos implements Ordena {
+public class StrategyOrdena implements Strategy {
 
     @Override
     public ArrayList ordenaEvento(String type, String coluna ) {

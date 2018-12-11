@@ -4,7 +4,7 @@ import com.eventos.apirest.models.Evento;
 
 import java.util.ArrayList;
 
-public interface Ordena {
+public interface Strategy {
 
     ArrayList<Evento> ordenaEvento(String type,String coluna);
 

@@ -13,6 +13,44 @@ import java.util.logging.Logger;
 
 public class EventoDao {
 
+//ITERATOR
+    public IteratorResultset criarIterator(ResultSet rs) {
+        return new IteratorResultset(rs);
+    }
+
+    //Exibir todos os eventos
+    public ArrayList<Evento> listarTudo()  {
+        String sql =  "SELECT * FROM evento ";
+
+        ArrayList<Evento> retorno = new ArrayList<Evento>();
+        PreparedStatement pst =  SingletonConexao.getPreparedStatement(sql);
+        ResultSet res = null;
+
+        try {
+            res = pst.executeQuery();
+
+            IteratorInterface iter = criarIterator(res);
+
+            while(iter.hasNext())
+            {
+                Evento item = new Evento();
+                item.setCodigo(res.getInt("codigo"));
+                item.setNome(res.getString("nome"));
+                item.setIdAdm(res.getInt("codigo_adm"));
+                item.setLocal(res.getString("local_e"));
+                item.setData(res.getString("data_e"));
+                item.setHorario(res.getString("horario"));
+
+                retorno.add(item);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return retorno;
+
+    }
+
 
     //Criar um Evento
     public	void adicionar(Evento e)  {
@@ -127,41 +165,7 @@ public class EventoDao {
         }
 
 
-    //Exibir todos os eventos
-    public ArrayList<Evento> listarTudo()  {
-        String sql =  "SELECT * FROM evento ";
 
-        ArrayList<Evento> retorno = new ArrayList<Evento>();
-
-        PreparedStatement pst =  SingletonConexao.getPreparedStatement(sql);
-
-
-        ResultSet res = null;
-
-        try {
-            res = pst.executeQuery();
-
-            IteratorInterface iter = criarIterator(res);
-
-            while(iter.hasNext())
-            {
-                Evento item = new Evento();
-                item.setCodigo(res.getInt("codigo"));
-                item.setNome(res.getString("nome"));
-                item.setIdAdm(res.getInt("codigo_adm"));
-                item.setLocal(res.getString("local_e"));
-                item.setData(res.getString("data_e"));
-                item.setHorario(res.getString("horario"));
-
-                retorno.add(item);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return retorno;
-
-    }
 
     public ArrayList<Evento> listarTudo(String atributo)  {
         String sql =  "SELECT * FROM evento ORDER BY '"+atributo+"'";
@@ -198,10 +202,32 @@ public class EventoDao {
 
     }
 
+    public boolean temPermissao(int e, int u) {
 
-    public IteratorResultset criarIterator(ResultSet rs) {
-        return new IteratorResultset(rs);
+        String sql = "SELECT * FROM evento_usuario eu WHERE eu.codigo_evento = " + e + "' AND eu.codigo_usuario = '" + u + "'";
+
+        PreparedStatement pst =  SingletonConexao.getPreparedStatement(sql);
+        ResultSet res = null;
+
+        try {
+            res = pst.executeQuery();
+
+            IteratorInterface iter = criarIterator(res);
+
+            if (iter.hasNext())
+            {
+             return true;
+            }
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+
+        return false;
     }
+
+
+
+
 
 }
 
