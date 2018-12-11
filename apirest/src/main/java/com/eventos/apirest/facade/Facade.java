@@ -18,11 +18,11 @@ public class Facade {
         usuarioDao.adicionar(u);
     }
 
-    public Usuario getUsuario(String rg){
+    public Usuario getUsuario(int rg){
         return usuarioDao.buscar(rg);
     }
 
-    public void removerUsuario (String u){
+    public void removerUsuario (int u){
         usuarioDao.remover(u);
     }
     public ArrayList<Usuario> listarUsuarios(){
@@ -34,9 +34,8 @@ public class Facade {
         eventoDao.adicionar(e);
     }
 
-    public void removerEvento (Long e){
+    public void removerEvento (int e){
         eventoDao.remover(e);
-
     }
     public ArrayList<Evento> listarEventos(String rg){
 
@@ -48,7 +47,7 @@ public class Facade {
         return eventoDao.listarTudo();
     }
 
-    public Evento detalhes (Long codigo){
+    public Evento detalhes (int codigo){
         return eventoDao.detalhes(codigo);
     }
 

@@ -4,11 +4,21 @@ import java.util.ArrayList;
 
 public class Evento {
 	
-	private long codigo;
+	private int codigo;
 
 	private String nome,local,data,horario;
 
+	private int  idAdm;
+
 	private ArrayList<Usuario> usuarios;
+
+	public int getIdAdm() {
+		return idAdm;
+	}
+
+	public void setIdAdm(int idAdm) {
+		this.idAdm = idAdm;
+	}
 
 	public ArrayList<Usuario> getUsuarios() {
 		return usuarios;
@@ -18,10 +28,10 @@ public class Evento {
 		this.usuarios = usuarios;
 	}
 
-	public long getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(long codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 	public String getNome() {
@@ -48,6 +58,7 @@ public class Evento {
 	public void setHorario(String horario) {
 		this.horario = horario;
 	}
-	
-	
+
+
+
 }

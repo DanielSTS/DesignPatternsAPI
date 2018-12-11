@@ -21,7 +21,7 @@ public class UsuarioDao {
         try {
 
             pst.setString(1,u.getNome());
-            pst.setString(2,u.getRg());
+            pst.setInt(2,u.getRg());
             pst.setString(3,u.getLogin());
             pst.setString(4,u.getSenha());
             pst.execute();
@@ -34,25 +34,23 @@ public class UsuarioDao {
 
     }
 
-    public	void remover(String rg)  {
+    public	void remover(int rg)  {
 
         String sql = "delete	from	usuario	where	rg=?";
 
         PreparedStatement pst = SingletonConexao.getPreparedStatement(sql);
 
         try {
-            pst.setString(1,rg);
+            pst.setInt(1,rg);
             pst.execute();
             pst.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-
-
     }
 
-    public Usuario buscar(String rg)
+    public Usuario buscar(int rg)
 
     {
         String sql = "SELECT * FROM usuario where rg=?";
@@ -62,14 +60,14 @@ public class UsuarioDao {
         PreparedStatement pst =  SingletonConexao.getPreparedStatement(sql);
         try {
 
-            pst.setString(1, rg);
+            pst.setInt(1, rg);
             ResultSet res = pst.executeQuery();
 
             if(res.next())
             {
                 retorno = new Usuario();
                 retorno.setNome(res.getString("nome"));
-                retorno.setRg(res.getString("rg"));
+                retorno.setRg(res.getInt("rg"));
                 retorno.setLogin(res.getString("login"));
                 retorno.setSenha(res.getString("senha"));
 
@@ -103,7 +101,7 @@ public class UsuarioDao {
             {
                 Usuario item = new Usuario();
                 item.setNome(res.getString("nome"));
-                item.setRg(res.getString("rg"));
+                item.setRg(res.getInt("rg"));
                 item.setLogin(res.getString("login"));
                 item.setSenha(res.getString("senha"));
 
@@ -136,7 +134,7 @@ public class UsuarioDao {
             {
                 Usuario item = new Usuario();
                 item.setNome(res.getString("nome"));
-                item.setRg(res.getString("rg"));
+                item.setRg(res.getInt("rg"));
                 item.setLogin(res.getString("login"));
                 item.setSenha(res.getString("senha"));
 

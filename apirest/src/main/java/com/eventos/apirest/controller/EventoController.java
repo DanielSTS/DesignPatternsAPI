@@ -24,10 +24,9 @@ public class EventoController {
     }
 
     @RequestMapping(value="/{codigo}", method=RequestMethod.GET)
-    public Evento detalhesEvento(@PathVariable("codigo") long codigo){
+    public Evento detalhesEvento(@PathVariable("codigo") int codigo){
       return new Facade().detalhes(codigo);
     }
-
 
     @RequestMapping("/deletarEvento")
     public void deletarEvento(@RequestBody Evento e) {
@@ -35,7 +34,7 @@ public class EventoController {
     }
 
     @RequestMapping("/deletarUsuario")
-    public void deletarUsuario(@RequestBody String u) {
+    public void deletarUsuario(@RequestBody int u) {
         new Facade().removerUsuario(u);
     }
 

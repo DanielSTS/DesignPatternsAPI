@@ -2,7 +2,9 @@ package com.eventos.apirest.models;
 
 public class Usuario {
 	
-	private String nome,rg,login,senha;
+	private String nome,login,senha;
+
+	private int rg;
 
 	public String getNome() {
 		return nome;
@@ -12,11 +14,11 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public String getRg() {
+	public int getRg() {
 		return rg;
 	}
 
-	public void setRg(String rg) {
+	public void setRg(int rg) {
 		this.rg = rg;
 	}
 
