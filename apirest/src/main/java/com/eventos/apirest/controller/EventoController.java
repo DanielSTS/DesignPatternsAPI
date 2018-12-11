@@ -12,37 +12,35 @@ import java.util.ArrayList;
 
 public class EventoController {
 
-    Facade facade = new Facade();
-
 
     @RequestMapping(value="/cadastrarEvento", method=RequestMethod.POST)
     public void adicionarEvento(Evento e){
-        facade.adicionarEvento(e);
+        new Facade().adicionarEvento(e);
     }
 
     @RequestMapping("/eventos")
     public ArrayList<Evento> listaEventos()  {
-        return facade.listarTodosEventos();
+        return new Facade().listarTodosEventos();
     }
 
     @RequestMapping(value="/{codigo}", method=RequestMethod.GET)
     public Evento detalhesEvento(@PathVariable("codigo") long codigo){
-      return facade.detalhes(codigo);
+      return new Facade().detalhes(codigo);
     }
 
 
     @RequestMapping("/deletarEvento")
     public void deletarEvento(@RequestBody Evento e) {
-        facade.removerEvento(e.getCodigo());
+        new Facade().removerEvento(e.getCodigo());
     }
 
     @RequestMapping("/deletarUsuario")
     public void deletarUsuario(@RequestBody String u) {
-        facade.removerUsuario(u);
+        new Facade().removerUsuario(u);
     }
 
     @RequestMapping(value="/{type}/{coluna}", method=RequestMethod.GET)
     public ArrayList listaOrdenado(@PathVariable("type") String type,@PathVariable("coluna") String coluna){
-        return facade.listarOrdenado(type,coluna);
+        return new Facade().listarOrdenado(type,coluna);
     }
 }
