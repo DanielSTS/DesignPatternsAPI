@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class SingletonConexao {
 
-    private static final String banco = "jdbc:mysql://localhost:3306/eventosapp?autoReconnect=true&useSSL=false";
+    private static final String banco = "jdbc:mysql://localhost:3306/eventos?autoReconnect=true&useSSL=false";
     private static final String driver = "com.mysql.cj.jdbc.Driver";
     private static final String usuario = "root";
     private static final String senha = "root123";

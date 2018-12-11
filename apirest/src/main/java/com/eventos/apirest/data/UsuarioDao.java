@@ -1,5 +1,7 @@
 package com.eventos.apirest.data;
 
+import com.eventos.apirest.iterator.IteratorInterface;
+import com.eventos.apirest.iterator.IteratorResultset;
 import com.eventos.apirest.models.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,42 +12,45 @@ import java.util.logging.Logger;
 
 public class UsuarioDao {
 
-    //Adiciona um usuário
-
-    public	void adicionar(Usuario u) throws SQLException {
+    public	void adicionar(Usuario u)  {
 
         String sql = "INSERT  INTO usuario (nome,rg,login,senha) VALUES(?,?,?,?) ";
 
         PreparedStatement pst = SingletonConexao.getPreparedStatement(sql);
 
-        pst.setString(1,u.getNome());
-        pst.setString(2,u.getRg());
-        pst.setString(3,u.getLogin());
-        pst.setString(4,u.getSenha());
+        try {
 
-        pst.execute();
-        pst.close();
+            pst.setString(1,u.getNome());
+            pst.setString(2,u.getRg());
+            pst.setString(3,u.getLogin());
+            pst.setString(4,u.getSenha());
+            pst.execute();
+            pst.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
 
     }
 
-
-    //Remove um usuário
-
-    public	void remover(Usuario u) throws SQLException {
+    public	void remover(String rg)  {
 
         String sql = "delete	from	usuario	where	rg=?";
 
         PreparedStatement pst = SingletonConexao.getPreparedStatement(sql);
 
-        pst.setString(1,u.getRg());
+        try {
+            pst.setString(1,rg);
+            pst.execute();
+            pst.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-        pst.execute();
-        pst.close();
+
 
     }
-
-    //Retorna um usuário específico
 
     public Usuario buscar(String rg)
 
@@ -77,9 +82,9 @@ public class UsuarioDao {
 
         return retorno;
 
+
     }
 
-    //Retorna todos os usuários
 
     public ArrayList<Usuario> listar()  {
         String sql = "SELECT * FROM usuario";
@@ -87,12 +92,14 @@ public class UsuarioDao {
 
         PreparedStatement pst =  SingletonConexao.getPreparedStatement(sql);
 
-        ResultSet res = null;
 
+        ResultSet res = null;
         try {
             res = pst.executeQuery();
 
-        while(res.next())
+            IteratorInterface iter = criarIterator(res);
+
+            while(iter.hasNext())
             {
                 Usuario item = new Usuario();
                 item.setNome(res.getString("nome"));
@@ -110,5 +117,42 @@ public class UsuarioDao {
 
     }
 
+
+    public ArrayList<Usuario> listar(String atributo)  {
+        String sql =  "SELECT * FROM evento ORDER BY '"+atributo+"'";
+
+        ArrayList<Usuario> retorno = new ArrayList<Usuario>();
+
+        PreparedStatement pst =  SingletonConexao.getPreparedStatement(sql);
+
+
+        ResultSet res = null;
+        try {
+            res = pst.executeQuery();
+
+            IteratorInterface iter = criarIterator(res);
+
+            while(iter.hasNext())
+            {
+                Usuario item = new Usuario();
+                item.setNome(res.getString("nome"));
+                item.setRg(res.getString("rg"));
+                item.setLogin(res.getString("login"));
+                item.setSenha(res.getString("senha"));
+
+                retorno.add(item);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return retorno;
+
+    }
+
+
+    public IteratorResultset criarIterator(ResultSet rs) {
+        return new IteratorResultset(rs);
+    }
 }
 

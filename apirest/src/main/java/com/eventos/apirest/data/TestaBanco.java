@@ -9,11 +9,11 @@ public class TestaBanco {
 
         Evento e = new Evento();
 
-        e.setCodigo(779);
-        e.setNome("Festa");
-        e.setData("13/08/2019");
-        e.setHorario("22:00");
-        e.setLocal("quinta da colina");
+        e.setCodigo(000);
+        e.setNome("tesewewewewewee");
+        e.setData("4325");
+        e.setHorario("hi");
+        e.setLocal("Trepa");
 
         EventoDao ed = new EventoDao();
 
