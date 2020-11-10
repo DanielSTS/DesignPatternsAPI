@@ -13,7 +13,7 @@ public class TestaBanco {
         e.setNome("tesewewewewewee");
         e.setData("4325");
         e.setHorario("hi");
-        e.setLocal("Trepa");
+        e.setLocal("dsfdf");
 
         EventoDao ed = new EventoDao();
 
