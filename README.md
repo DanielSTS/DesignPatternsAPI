@@ -1,13 +1,10 @@
-# Desenvolvimento de uma API REST usando Padrões de Projetos 
+# Design Patterns API
+A REST API that implements design patterns, developed as part of the Design Patterns curriculum component in the Bachelor's degree in Computer Engineering, IFPB, Campus Campina Grande.
 
-Projeto do componente curricular Padrões de Projetos,
-no curso de Bacharelado em Engenharia de computação, IFPB, Campus Campina Grande. 
+## Description
+The application enables the registration of events and their organizers, allowing interested individuals to sign up for them.
 
-## Descrição
-
-A aplicação possibilita o cadastro de eventos e seus organizadores, permitindo que pessoas interessadas possam se inscrever neles.
-
-## Tecnologias 
+## Technologies
 - `Java`
 - `SpringBoot`
 - `MySQL`
